@@ -10,10 +10,10 @@ const NavBar = () => {
         <div>
         <AppBar position="static">
             <Toolbar>
-                <Typography variant="h6" noWrap className="nav-item">
+                <Typography variant="h6" noWrap>
                     <Link to="/">Home</Link>
                 </Typography>
-                <Typography variant="h6" noWrap className="nav-item">
+                <Typography variant="h6" noWrap>
                     <Link to="/contact-us">Contact Us</Link>
                 </Typography>
             </Toolbar>
