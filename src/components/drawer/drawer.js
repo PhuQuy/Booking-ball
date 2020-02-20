@@ -124,6 +124,8 @@ export default function TemporaryDrawer() {
   return (
     <div className="component-drawer">
    <Button onClick={toggleDrawer('left', true)} color="primary">Open Left</Button>
+   <Button onClick={toggleDrawer('left', true)} color="primary">Open Left</Button>
+
       <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
         {sideList("left")}
       </Drawer>
