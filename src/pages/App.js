@@ -30,6 +30,7 @@ const theme = createMuiTheme({
 });
 const Home = lazy(() => import("./home"));
 const ContactUs = lazy(() => import("./contactUs"));
+const Checkout = lazy(() => import("./checkout"));
 
 const App = () => (
   <ThemeProvider theme={theme}>
@@ -39,6 +40,7 @@ const App = () => (
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/contact-us" component={ContactUs} />
+          <Route path="/checkout" component={Checkout} />
         </Switch>
       </Suspense>
     </Router>
