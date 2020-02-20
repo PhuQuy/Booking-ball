@@ -3,6 +3,7 @@ import "./search.scss";
 import { Container, Typography } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
+import CustomizedInputBase from "../customizedInputBase/customizedInputBase";
 
 // import { connect } from "react-redux";
 // import { bindActionCreators } from "redux";
@@ -41,6 +42,9 @@ export default function Search() {
               <Typography variant="h6" color="secondary">
                 The only website allow player booking the vsoocer ground online
               </Typography>
+            </Box>
+            <Box textAlign="center">
+                <CustomizedInputBase></CustomizedInputBase>
             </Box>
           </Box>
         </Box>
