@@ -1,125 +1,141 @@
-import React from 'react'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import { Link } from "react-router-dom";
-import './NavBar.scss'
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl';
-import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { withStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
-import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
+import AppBar from "@material-ui/core/AppBar";
+import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
+import Drawer from "@material-ui/core/Drawer";
+import Hidden from "@material-ui/core/Hidden";
+import IconButton from "@material-ui/core/IconButton";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import { makeStyles } from "@material-ui/core/styles";
+import SvgIcon from "@material-ui/core/SvgIcon";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import MenuIcon from "@material-ui/icons/Menu";
+import React from "react";
+import MyButton from "./customButton";
+import "./NavBar.scss";
 
-const useStyles = makeStyles(theme =>
-  createStyles({
-    margin: {
-      margin: theme.spacing(1),
-    },
-  }),
-);
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
+  menuButton: {
+    marginRight: theme.spacing(3)
+  },
+  title: {
+    flexGrow: 1,
+    color: theme.primary
+  }
+}));
+
+function HomeIcon(props) {
+  return (
+    <SvgIcon {...props}>
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+    </SvgIcon>
+  );
+}
+
+function HomeIcon2(props) {
+  return (
+    <SvgIcon {...props}>
+      <path d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z" />
+    </SvgIcon>
+  );
+}
+
 const NavBar = () => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [state, setState] = React.useState(true);
-  const GreenCheckbox = withStyles({
-    root: {
-      color: green[400],
-      '&$checked': {
-        color: green[600],
-      },
-    },
-    checked: {},
-  })(props => <Checkbox color="default" {...props} />);
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-  const openLogin = () => {
-    setOpen(true);
-  };
-  const close = () => {
-    setOpen(false);
-  };
-  const handleChange = () => event => {
-    setState(event.target.checked);
-  };
-    return(
-        <div>
-        <AppBar position="static">
-            <Toolbar>
-                <Typography variant="h6" noWrap className="nav-item">
-                    <Link to="/" className="nav-link">Home</Link>
-                </Typography>
-                <Typography variant="h6" noWrap className="nav-item">
-                    <Link to="/contact-us" className="nav-link">Contact Us</Link>
-                </Typography>
-                <Button color="inherit" onClick={openLogin}>Login</Button>
-                <Dialog
-                  fullScreen={fullScreen}
-                  open={open}
-                  onClose={close}
-                  aria-labelledby="responsive-dialog-title"
-                >
-                  <DialogTitle id="responsive-dialog-title">{"Dialog Title"}</DialogTitle>
-                  <DialogContent>
-                    <FormControl className={classes.margin}>
-                      <TextField
-                        className={classes.margin}
-                        id="outlined-secondary"
-                        label="Phone Number"
-                        variant="outlined"
-                        endAdornment={
-                          <InputAdornment position="end">
-                              <AccountCircle />
-                          </InputAdornment>
-                        }
-                      />
-                         <TextField
-                        className={classes.margin}
-                        id="outlined-secondary"
-                        label="OTP Code"
-                        variant="outlined"
-                        endAdornment={
-                          <InputAdornment position="end">
-                              <AccountCircle />
-                          </InputAdornment>
-                        }
-                      />
-                      <FormControlLabel
-                        control={
-                          <GreenCheckbox
-                            checked={state}
-                            onChange={handleChange()}
-                            value="checkedG"
-                          />
-                        }
-                        label="Custom color"
-                      />
-                      <p>Forgot Password</p>
-                      <Button variant="contained" color="primary">LOGIN</Button>
-                      <p>Not has an account yet? <a>Sign up now</a></p>
-                    </FormControl>
-                  </DialogContent>
+  const [state, setState] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false
+  });
 
+  const toggleDrawer = (side, open) => event => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
 
-                  <DialogActions>
-                  
-                  </DialogActions>
+    setState({ ...state, [side]: open });
+  };
 
-                </Dialog>
-            </Toolbar>
-        </AppBar>
-        </div>
-    )
-}
+  const sideList = side => (
+    <div
+      className={classes.list}
+      role="presentation"
+      onClick={toggleDrawer(side, false)}
+      onKeyDown={toggleDrawer(side, false)}
+    >
+      <List>
+        {["Home", "Booking", "Contact", "Login"].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>
+              {index % 2 === 0 ? <HomeIcon2 /> : <HomeIcon />}
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+    </div>
+  );
+
+  return (
+    <div className={classes.root}>
+      <AppBar position="static" color="secondary">
+        <Container maxWidth="lg">
+          <Toolbar>
+            <Hidden smUp>
+              <IconButton
+                edge="start"
+                className={classes.menuButton}
+                color="inherit"
+                aria-label="menu"
+                onClick={toggleDrawer("left", true)}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Hidden>
+            <Typography variant="h4" className={classes.title} color="primary">
+              BALLDEE
+              {/* <Link to="/" color="primary"></Link> */}
+            </Typography>
+            {/* <Typography variant="h6" className={classes.title}>
+              <Link to="/contact-us">Contact Us</Link>
+            </Typography> */}
+            <Hidden smDown>
+              <div className={classes.sectionDesktop}>
+                <Button color="primary" className={classes.menuButton}>
+                  Home
+                </Button>
+                <Button color="primary" className={classes.menuButton}>
+                  Booking
+                </Button>
+                <Button color="primary" className={classes.menuButton}>
+                  Contact
+                </Button>
+                <Button color="primary" className={classes.menuButton}>
+                  Login
+                </Button>
+                <MyButton>
+                  Signup Now!
+                </MyButton>
+              </div>
+            </Hidden>
+          </Toolbar>
+        </Container>
+      </AppBar>
+      <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
+        {sideList("left")}
+      </Drawer>
+    </div>
+  );
+};
 
 export default NavBar;
