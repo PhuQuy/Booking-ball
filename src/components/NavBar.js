@@ -27,6 +27,9 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
     color: theme.primary
+  },
+  appBar: {
+    boxShadow: "none"
   }
 }));
 
@@ -88,7 +91,7 @@ const NavBar = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="secondary">
+      <AppBar position="static" color="secondary" className={classes.appBar}>
         <Container maxWidth="lg">
           <Toolbar>
             <Hidden smUp>
@@ -123,9 +126,7 @@ const NavBar = () => {
                 <Button color="primary" className={classes.menuButton}>
                   Login
                 </Button>
-                <MyButton>
-                  Signup Now!
-                </MyButton>
+                <MyButton>Signup Now!</MyButton>
               </div>
             </Hidden>
           </Toolbar>
