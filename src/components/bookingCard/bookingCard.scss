@@ -1,0 +1,51 @@
+$green: #007838;
+$greenBold: #003817;
+$white: #fff;
+
+.booking-card {
+  background-color: $green;
+  border-radius: 10px;
+  color: $white;
+  font-weight: 300;
+
+  .booking-card-content {
+    padding: 20px 0;
+
+    .football-field-name {
+      background-color: $greenBold;
+    }
+
+    .information {
+      .time-label {
+        background-color: $white;
+        color: black;
+      }
+
+      .customer-name {
+        border-width: 2px;
+      }
+
+      .ground-label {
+        background-color: $white;
+        color: $green;
+      }
+
+      .verify-label {
+        background-color: $green;
+        border-width: 4px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .ground-label {
+    padding: 8px 25px !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .football-field-name {
+    font-size: 17px !important;
+  }
+}

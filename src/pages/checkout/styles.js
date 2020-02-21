@@ -3,9 +3,6 @@ const styles = (theme) => ({
         flexGrow: 1,
         margin: 24,
     },
-    pb2: {
-        paddingBottom: '5px !important',
-    },
     justifyContentCenter: {
         justifyContent: 'center'
     }

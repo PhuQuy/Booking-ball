@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     height: "100%"
   }
 }));
-export default function Search() {
+export default function Search () {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -44,7 +44,7 @@ export default function Search() {
               </Typography>
             </Box>
             <Box textAlign="center">
-                <CustomizedInputBase></CustomizedInputBase>
+              <CustomizedInputBase></CustomizedInputBase>
             </Box>
           </Box>
         </Box>
